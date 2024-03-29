@@ -74,7 +74,7 @@ const App = () => {
               setNotification(`${newName} is updated with new number ${newNumber}`, false)
             })
             .catch(error => {
-              setNotification(`Information of ${newName} has already been removed from the server`, true)
+              setNotification(error.response.data.error, true)
             })
           setNewName('')
           setNewNumber('')

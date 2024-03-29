@@ -1,0 +1,47 @@
+GET http://localhost:3001/api/persons
+
+###
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+    "name": "toedit",
+    "number": "123"
+}
+
+###
+GET http://localhost:3001/api/persons
+
+###
+PUT http://localhost:3001/api/persons/66065fae47b1cae3cc3c35c8
+Content-Type: application/json
+
+{
+    "number": "123"
+}
+
+###
+PUT http://localhost:3001/api/persons/66065fae47b1cae3cc3c35c8
+Content-Type: application/json
+
+{
+    "name": "123"
+}
+
+###
+PUT http://localhost:3001/api/persons/66065fae47b1cae3cc3c35c8
+Content-Type: application/json
+
+{
+    "name": "toedit1",
+    "number": "12345"
+}
+
+###
+GET http://localhost:3001/api/persons
+
+###
+DELETE http://localhost:3001/api/persons/66065fae47b1cae3cc3c35c8
+
+###
+GET http://localhost:3001/api/persons
