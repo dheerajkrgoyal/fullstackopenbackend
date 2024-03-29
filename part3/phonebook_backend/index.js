@@ -70,18 +70,6 @@ app.delete('/api/persons/:id', (request, response, next) => {
 app.post('/api/persons', (request, response, next) => {
     const body = request.body
 
-    if(!body.name){
-        return response.status(400).json({
-            error: 'bad request: name not found'
-        })
-    }
-
-    if(!body.number){
-        return response.status(400).json({
-            error: 'bad request: number not found'
-        })
-    }
-
     const person = new Person({
         name: body.name,
         number: body.number
@@ -97,24 +85,12 @@ app.post('/api/persons', (request, response, next) => {
 app.put('/api/persons/:id', (request, response, next) => {
     const body = request.body
 
-    if(!body.name){
-        return response.status(400).json({
-            error: 'bad request: name not found'
-        })
-    }
-
-    if(!body.number){
-        return response.status(400).json({
-            error: 'bad request: number not found'
-        })
-    }
-
     const person = {
         name: body.name,
         number: body.number
     }
 
-    Person.findByIdAndUpdate(request.params.id, person, {new : true})
+    Person.findByIdAndUpdate(request.params.id, person, {new : true, runValidators: true, context: 'query'})
         .then(updated => {
             if(!updated){
                 return response.status(404).json({
@@ -137,6 +113,11 @@ app.use(unknownEndpoint)
 const errorHandler = (error, request, response, next) => {
     console.log(error.message)
     if(error.name === 'CastError'){
+        return response.status(400).json({
+            error: error.message
+        })
+    }
+    if(error.name === 'ValidationError'){
         return response.status(400).json({
             error: error.message
         })

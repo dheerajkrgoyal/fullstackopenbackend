@@ -21,7 +21,7 @@ const App = () => {
     setUserMessage(notificationMessage)
     setTimeout(() => {
       setUserMessage(null)
-    }, 2000)
+    }, 5000)
   }
 
   useEffect(()=> {
