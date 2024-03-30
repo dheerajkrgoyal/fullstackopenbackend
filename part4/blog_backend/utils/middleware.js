@@ -2,26 +2,26 @@ const logger = require('./logger')
 const morgan = require('morgan')
 
 const unknownPath = (request, response) => {
-    response.status(404).json({
-        error: 'uknown path'
-    })
+	response.status(404).json({
+		error: 'uknown path'
+	})
 }
 
 const errorHandler = (error, request, response, next) => {
-    logger.error(error.message)
+	logger.error(error.message)
 
-    if(error.name === 'CastError'){
-        return response.status(400).json({
-            error: error.message
-        })
-    }
-    if(error.name === 'ValidationError'){
-        return response.status(400).json({
-            error: error.message
-        })
-    }
+	if(error.name === 'CastError'){
+		return response.status(400).json({
+			error: error.message
+		})
+	}
+	if(error.name === 'ValidationError'){
+		return response.status(400).json({
+			error: error.message
+		})
+	}
 
-    next(error)
+	next(error)
 }
 
 morgan.token('request-body', function getId (req) {
@@ -29,6 +29,6 @@ morgan.token('request-body', function getId (req) {
 })
 
 module.exports = {
-    unknownPath,
-    errorHandler
+	unknownPath,
+	errorHandler
 }
