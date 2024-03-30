@@ -1,0 +1,15 @@
+GET http://localhost:3002/api/blogs
+
+###
+POST http://localhost:3002/api/blogs
+Content-Type: application/json
+
+{
+    "title": "test blog title",
+    "author": "dheeraj",
+    "url": "https://www.lifeinhurry.com/post/create-spring-boot",
+    "likes": 10
+}
+
+###
+GET http://localhost:3002/api/blogs
