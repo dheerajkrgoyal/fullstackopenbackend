@@ -1,6 +1,7 @@
 const config = require('./utils/config')
 const express = require('express')
 const cors = require('cors')
+require('express-async-errors')
 const blogsRouter = require('./controllers/blog')
 const middleware = require('./utils/middleware')
 const logger = require('./utils/logger')
@@ -23,7 +24,9 @@ mongoose.connect(config.MONGODB_URL)
 app.use(cors())
 app.use(express.static('dist'))
 app.use(express.json())
-app.use(morgan(':method :url :status :res[content-length] - :response-time ms :request-body'))
+if(process.env.NODE_ENV !== 'test'){
+	app.use(morgan(':method :url :status :res[content-length] - :response-time ms :request-body'))
+}
 app.use('/api/blogs', blogsRouter)
 
 app.use(middleware.unknownPath)
